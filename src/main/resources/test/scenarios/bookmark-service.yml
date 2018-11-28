@@ -1,0 +1,38 @@
+Scenario(BookmarkService):
+  urlContext: /api/v1/bookmarks
+  interactions:
+  - description: create google bookmark
+    request:
+      post: ""
+      params:
+        url: http://google.com
+        name: google
+    response:
+      json:
+        id:
+        - exists: true
+    cache:
+      googleId: id
+  - description: verify google bookmark creation
+    request:
+      get: ${googleId}
+    response:
+      json:
+        url: http://google.com
+        name: google
+  - description: list all bookmarks
+    request:
+      get: ""
+    response:
+      json:
+        size: 1
+        0:
+          name: google
+  - description: delete google bookmark
+    request:
+      delete: ${googleId}
+  - description: verify google bookmark delete
+    request:
+      get: ${googleId}
+    response:
+      status: 404

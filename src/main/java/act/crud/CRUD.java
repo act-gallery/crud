@@ -43,8 +43,8 @@ public abstract class CRUD<MODEL> {
         return Controller.Util.renderTemplate("CRUD/index.html");
     }
 
-    public Result list(int page, String search, String searchFields, String orderBy, String order) {
+    /*public Result list(int page, String search, String searchFields, String orderBy, String order) {
 
-    }
+    }*/
 
 }

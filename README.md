@@ -1,2 +1,2 @@
-# act-aaa-plugin
-Allow it to use osgl aaa library to handle security of ACT Framework application
+# act-crud
+An ActFramework implementation of Play's crud module

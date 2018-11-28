@@ -1,0 +1,4 @@
+#!/bin/sh
+echo building ...
+mvn -q compile act:run
+#mvn -q compile -Dact.jpdaPort=6666 act:run
