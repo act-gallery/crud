@@ -1,17 +1,13 @@
 package crud.controllers;
 
-import act.Act;
+import static act.Act.LOGGER;
+
 import act.controller.Controller;
-import org.osgl.http.H;
-import org.osgl.mvc.annotation.After;
-import org.osgl.mvc.annotation.Before;
-import org.osgl.mvc.annotation.Catch;
-import org.osgl.mvc.annotation.Finally;
+import act.inject.param.NoBind;
+import org.osgl.mvc.annotation.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
-import static act.Act.LOGGER;
 
 /**
  * @author dreamingo
@@ -19,9 +15,11 @@ import static act.Act.LOGGER;
 public class ControllerX extends Controller.Util {
 
     /** 执行开始时间 */
+    @NoBind
     public Long startTime = 0L;
 
     /** 执行是否成功 */
+    @NoBind
     public Boolean success = true;
 
     /** HTTP GET方法 */

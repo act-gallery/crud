@@ -13,4 +13,7 @@ classes
 *.iml
 deploy
 .DS_Store
-
+.act*
+*.log
+*.pid
+test*.db
