@@ -1,19 +1,14 @@
 package crud.controllers;
 
 import act.app.ActionContext;
-import act.db.DbBind;
 import act.db.jpa.JPADao;
-import crud.consts.ConstX;
 import crud.models.ModelX;
 import org.osgl.$;
-import org.osgl.mvc.annotation.DeleteAction;
-import org.osgl.mvc.annotation.GetAction;
-import org.osgl.mvc.annotation.PostAction;
-import org.osgl.mvc.annotation.PutAction;
+import org.osgl.mvc.annotation.*;
 
+import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.util.List;
 
 public abstract class Crud<ID, T extends ModelX> extends ControllerX {
 
@@ -31,22 +26,12 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
 
     /**
      * 列表：根据条件查找
+     * @param idList
      * @return 查找到的对象列表
      */
     @GetAction()
-    //@ResponseContentType(H.MediaType.JSON)
-    public List<T> list() {
-        return dao.findAllAsList();
-    }
-
-    /**
-     * 列表：根据ID批量查找
-     * @param ids
-     * @return 查找到的对象列表
-     */
-    @GetAction("listByIds")
-    public List<T> listByIds (List<ID> ids) {
-        return (List<T>) dao.findByIdList(ids);
+    public Iterable<T> list(List<ID> idList) {
+        return idList.isEmpty() ? dao.findAll() : dao.findByIdList(idList);
     }
 
     /**
@@ -54,7 +39,7 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
      * @param id
      * @return 查找到的对象
      */
-    @GetAction("show/{id}")
+    @GetAction("{id}")
     public T show(ID id) {
         return dao.findById(id);
     }
@@ -79,7 +64,7 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
      * @param obj
      * @return 更新后的对象
      */
-    @PutAction("update/{id}")
+    @PutAction("{id}")
     public T update(ID id, @Valid T obj) {
         T oobj = dao.findById(id);
         //$.copy(obj).to(oobj);
@@ -100,7 +85,7 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
      * 删除
      * @param id
      */
-    @DeleteAction("delete/{id}")
+    @DeleteAction("{id}")
     public void delete(ID id) {
         //方法一：直接使用dao根据ID删除
         dao.deleteById(id);

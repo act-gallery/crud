@@ -35,7 +35,7 @@ public abstract class CRUD<MODEL> {
     }
 
     public CRUD(Class<MODEL> modelType) {
-        this.modelType = $.notNull(modelType);
+        this.modelType = $.requireNotNull(modelType);
         dao = App.instance().dbServiceManager().dao(modelType);
     }
 
