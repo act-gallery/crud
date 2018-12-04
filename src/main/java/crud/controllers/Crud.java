@@ -2,7 +2,10 @@ package crud.controllers;
 
 import act.app.ActionContext;
 import act.db.jpa.JPADao;
+import act.util.PropertySpec;
 import crud.models.ModelX;
+import crud.util.RequestData;
+import crud.util.ResponseData;
 import org.osgl.$;
 import org.osgl.mvc.annotation.*;
 
@@ -30,8 +33,10 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
      * @return 查找到的对象列表
      */
     @GetAction()
-    public Iterable<T> list(List<ID> idList) {
-        return idList.isEmpty() ? dao.findAll() : dao.findByIdList(idList);
+    public ResponseData list(List<ID> idList, RequestData d) {
+        setPropertySpec(d);
+        Iterable<T> objList = idList.isEmpty() ? dao.findAll() : dao.findByIdList(idList);
+        return new ResponseData(objList, 200L, 10L);
     }
 
     /**
@@ -40,7 +45,8 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
      * @return 查找到的对象
      */
     @GetAction("{id}")
-    public T show(ID id) {
+    public T show(ID id, RequestData d) {
+        setPropertySpec(d);
         return dao.findById(id);
     }
 
@@ -50,11 +56,8 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
      * @return 创建后的对象
      */
     @PostAction()
-    public T create(@Valid T obj) {
-        if(context.hasViolation()) {
-            renderJson(context.violations());
-            //renderText("Error(s): \n%s", context.violationMessage());
-        }
+    public T create(@Valid T obj, RequestData d) {
+        setPropertySpec(d);
         return dao.save(obj);
     }
 
@@ -102,6 +105,12 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
     @DeleteAction("deleteBatch")
     public Long deleteBatch() {
         return 0L;
+    }
+
+    public void setPropertySpec(RequestData d) {
+        if(null != d && null != d.fields) {
+            PropertySpec.current.set(d.fields);
+        }
     }
 
 }
