@@ -12,7 +12,7 @@ public class GlobalResponseAdvice implements ReturnValueAdvice {
         if (o instanceof ResponseData) {
             return o;
         } else if (o instanceof JSONObject) {
-            if(((JSONObject) o).get("totalCount") != null) {
+            if(((JSONObject) o).get("page") != null) {
                 return o;
             }
         }
