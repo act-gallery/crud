@@ -23,5 +23,5 @@ public class ModelX implements SimpleBean {
     @LastModifiedAt
     public Date modifiedAt;
 
-    public Integer status;
+    public Integer status = 1;
 }

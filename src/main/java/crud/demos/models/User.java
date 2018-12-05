@@ -20,7 +20,7 @@ public class User extends ModelX {
 
     @Min(18)
     @Max(60)
-    public Integer age;
+    public Integer age = 0;
 
     @Transient
     public Group group;

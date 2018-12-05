@@ -4,6 +4,7 @@ import act.app.ActionContext;
 import act.db.jpa.JPADao;
 import act.util.PropertySpec;
 import crud.models.ModelX;
+import crud.util.Page;
 import crud.util.RequestData;
 import crud.util.ResponseData;
 import org.osgl.$;
@@ -36,7 +37,7 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
     public ResponseData list(List<ID> idList, RequestData d) {
         setPropertySpec(d);
         Iterable<T> objList = idList.isEmpty() ? dao.findAll() : dao.findByIdList(idList);
-        return new ResponseData(objList, 200L, 10L);
+        return new ResponseData(objList, new Page(1, 10, 20L, 2));
     }
 
     /**

@@ -3,9 +3,7 @@ package crud.util;
 public class ResponseData {
     public Object result;
 
-    public Long totalCount;
-
-    public Long totalPage;
+    public Page page;
 
     public ResponseData() {
     }
@@ -14,9 +12,8 @@ public class ResponseData {
         this.result = result;
     }
 
-    public ResponseData(Object result, Long totalCount, Long totalPage) {
+    public ResponseData(Object result, Page page) {
         this.result = result;
-        this.totalCount = totalCount;
-        this.totalPage = totalPage;
+        this.page = page;
     }
 }
