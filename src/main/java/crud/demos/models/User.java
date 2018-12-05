@@ -23,7 +23,7 @@ public class User extends ModelX {
     public Integer age = 0;
 
     @Transient
-    public Group group;
+    public Group group = getGroup();
 
     @Transient
     public List<Address> addressList;
