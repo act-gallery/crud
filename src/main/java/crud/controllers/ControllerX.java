@@ -31,13 +31,13 @@ public class ControllerX extends Controller.Util {
     @Before
     public void init() {
         startTime = System.currentTimeMillis();
-        System.out.println("init:;:::::::::::::::");
+        //System.out.println("init:;:::::::::::::::");
     }
 
     @Catch(value=Throwable.class, priority = 1)
     public void catchThrowable(Throwable throwable) {
         success = false;
-        System.out.println("catchThrowable:;:::::::::::::");
+        //System.out.println("catchThrowable:;:::::::::::::");
         LOGGER.error("Action execute failed at [%s].", throwable.getStackTrace());
         LOGGER.error("Error is: %s.", getExceptionStr(throwable));
     }
@@ -51,12 +51,12 @@ public class ControllerX extends Controller.Util {
     @After
     public void doAfter() {
         success = true;
-        System.out.println("doAfter:;:::::::::::::");
+        //System.out.println("doAfter:;:::::::::::::");
     }
 
     @Finally
     public void doFinally() {
-        System.out.println("doFinally:;:::::::::::::" + success);
+        //System.out.println("doFinally:;:::::::::::::" + success);
         Long executeTime = System.currentTimeMillis() - startTime;
         LOGGER.info("executeTime::::::::" + executeTime);
     }
