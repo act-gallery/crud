@@ -7,6 +7,7 @@ import crud.models.ModelX;
 import crud.util.Page;
 import crud.util.RequestData;
 import crud.util.ResponseData;
+import crud.util.Sort;
 import org.osgl.$;
 import org.osgl.mvc.annotation.*;
 
@@ -37,7 +38,8 @@ public abstract class Crud<ID, T extends ModelX> extends ControllerX {
     public ResponseData list(List<ID> idList, RequestData d) {
         setPropertySpec(d);
         Iterable<T> objList = idList.isEmpty() ? dao.findAll() : dao.findByIdList(idList);
-        return new ResponseData(objList, new Page(1, 10, 20L, 2));
+        Sort s1 = new Sort("name", true);
+        return new ResponseData(objList, new Page(1, 10, 20L, 2), new Sort[] {s1});
     }
 
     /**
