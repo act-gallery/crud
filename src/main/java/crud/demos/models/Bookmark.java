@@ -1,19 +1,23 @@
 package crud.demos.models;
 
 import act.util.SimpleBean;
+import crud.models.ModelX;
 
 import javax.persistence.*;
 
 @Entity(name = "bookmark")
-public class Bookmark implements SimpleBean { //extends ModelX {
+public class Bookmark extends ModelX { // implements SimpleBean
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    public Long id;*/
 
     public String name;
 
     public String url;
+
+    @Transient
+    public User user;
 
     /*public String getName() {
         return name;
@@ -31,4 +35,6 @@ public class Bookmark implements SimpleBean { //extends ModelX {
         this.url = url;
     }*/
 
+    public Bookmark() {
+    }
 }

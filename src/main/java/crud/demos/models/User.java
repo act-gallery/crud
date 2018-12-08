@@ -23,6 +23,9 @@ public class User extends ModelX {
     public Integer age = 0;
 
     @Transient
+    public User invitor;
+
+    @Transient
     public Group group = getGroup();
 
     @Transient
