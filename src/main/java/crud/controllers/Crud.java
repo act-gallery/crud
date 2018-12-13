@@ -1,6 +1,7 @@
 package crud.controllers;
 
 import act.app.ActionContext;
+import act.app.util.SimpleRestfulServiceBase;
 import act.db.jpa.JPADao;
 import act.util.PropertySpec;
 import crud.models.ModelX;
@@ -15,13 +16,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-public abstract class Crud<ID, T extends ModelX> extends ControllerX {
+public abstract class Crud<ID, T extends ModelX> extends CrudBase<ID, T, JPADao<ID, T>> {
 
     /**
      * 依赖注入：DAO
      */
-    @Inject
-    protected JPADao<ID, T> dao;
+    //@Inject
+    //protected JPADao<ID, T> dao;
 
     /**
      * 依赖注入：上下文环境

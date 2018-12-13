@@ -13,7 +13,7 @@
   <parent>
     <groupId>org.actframework</groupId>
     <artifactId>act-starter-parent</artifactId>
-    <version>1.8.14.0</version>
+    <version>1.8.16.1</version>
   </parent>
 
   <properties>
@@ -28,17 +28,17 @@
       <artifactId>act-eclipselink</artifactId>
     </dependency>
 
-    <dependency>
+    <!--<dependency>
       <groupId>org.actframework</groupId>
       <artifactId>act-jpa-common</artifactId>
       <version>1.5.4-SNAPSHOT</version>
-    </dependency>
+    </dependency>-->
 
-    <dependency>
+    <!--<dependency>
       <groupId>org.actframework</groupId>
       <artifactId>act</artifactId>
       <version>1.8.16-SNAPSHOT</version>
-    </dependency>
+    </dependency>-->
 
     <!--<dependency>
       <groupId>mysql</groupId>
