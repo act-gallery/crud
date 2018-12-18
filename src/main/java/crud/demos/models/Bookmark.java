@@ -14,6 +14,8 @@ public class Bookmark extends ModelX { // implements SimpleBean
 
     public String name;
 
+    public String title;
+
     public String url;
 
     @Transient

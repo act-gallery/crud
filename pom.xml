@@ -28,6 +28,11 @@
       <artifactId>act-eclipselink</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.actframework</groupId>
+      <artifactId>act-morphia</artifactId>
+    </dependency>
+
     <!--<dependency>
       <groupId>org.actframework</groupId>
       <artifactId>act-jpa-common</artifactId>
