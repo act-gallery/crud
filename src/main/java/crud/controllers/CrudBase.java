@@ -13,10 +13,7 @@ import crud.util.ResponseData;
 import crud.util.Sort;
 import org.osgl.$;
 import org.osgl.inject.BeanSpec;
-import org.osgl.mvc.annotation.DeleteAction;
-import org.osgl.mvc.annotation.GetAction;
-import org.osgl.mvc.annotation.PostAction;
-import org.osgl.mvc.annotation.PutAction;
+import org.osgl.mvc.annotation.*;
 import org.osgl.util.Generics;
 
 import javax.inject.Inject;
@@ -62,10 +59,12 @@ public abstract class CrudBase<ID, T, D extends DaoBase<ID, T, ?>> {
      * @param id
      * @return 查找到的对象
      */
-    @GetAction("{id}")
+    @PostAction("show/{id}")
+    @ResponseStatus(200)
     public T show(ID id, RequestData d) {
+        T obj = dao.findById(id);
         setPropertySpec(d);
-        return dao.findById(id);
+        return obj;
     }
 
     /**
