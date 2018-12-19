@@ -7,20 +7,17 @@ import act.db.DaoLoader;
 import act.inject.param.NoBind;
 import act.util.Global;
 import act.util.PropertySpec;
-import crud.util.Page;
-import crud.util.RequestData;
-import crud.util.ResponseData;
-import crud.util.Sort;
+import crud.util.*;
 import org.osgl.$;
 import org.osgl.inject.BeanSpec;
 import org.osgl.mvc.annotation.*;
 import org.osgl.util.Generics;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
+import javax.inject.Inject;
+import javax.validation.Valid;
 
 public abstract class CrudBase<ID, T, D extends DaoBase<ID, T, ?>> {
     @Global
@@ -46,7 +43,7 @@ public abstract class CrudBase<ID, T, D extends DaoBase<ID, T, ?>> {
      * @param idList
      * @return 查找到的对象列表
      */
-    @GetAction()
+    @GetAction
     public ResponseData list(List<ID> idList, RequestData d) {
         setPropertySpec(d);
         Iterable<T> objList = idList.isEmpty() ? dao.findAll() : dao.findByIdList(idList);
@@ -59,7 +56,7 @@ public abstract class CrudBase<ID, T, D extends DaoBase<ID, T, ?>> {
      * @param id
      * @return 查找到的对象
      */
-    @PostAction("show/{id}")
+    @GetAction("{id}")
     @ResponseStatus(200)
     public T show(ID id, RequestData d) {
         T obj = dao.findById(id);
