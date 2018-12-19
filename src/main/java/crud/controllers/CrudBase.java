@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 public abstract class CrudBase<ID, T, D extends DaoBase<ID, T, ?>> {
+
     @Global
     @NoBind
     protected D dao;
@@ -56,7 +57,7 @@ public abstract class CrudBase<ID, T, D extends DaoBase<ID, T, ?>> {
      * @param id
      * @return 查找到的对象
      */
-    @GetAction("{id}")
+    @PostAction("show/{id}")
     @ResponseStatus(200)
     public T show(ID id, RequestData d) {
         T obj = dao.findById(id);
