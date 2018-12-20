@@ -1,13 +1,17 @@
 package crud.models;
 
+import act.db.CreatedAt;
+import act.db.LastModifiedAt;
 import act.inject.param.NoBind;
 import act.util.SimpleBean;
 import org.bson.types.ObjectId;
+import org.joda.time.DateTime;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Version;
 
 @NoBind
-public abstract class MorphiaModelX implements SimpleBean {
+public abstract class ModelMorphiaX implements SimpleBean {
 
     /**
      * 主键
@@ -28,5 +32,19 @@ public abstract class MorphiaModelX implements SimpleBean {
      * 9 - 逻辑删除
      */
     public Integer st = 1;
+
+    /**
+     * 创建时间
+     */
+    @Indexed
+    @CreatedAt
+    public DateTime ct;
+
+    /**
+     * 最后修改时间
+     */
+    @Indexed
+    @LastModifiedAt
+    public DateTime my;
 
 }

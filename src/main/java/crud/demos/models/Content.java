@@ -1,13 +1,30 @@
 package crud.demos.models;
 
 import act.db.DB;
-import crud.models.MorphiaModelX;
-import org.mongodb.morphia.annotations.Entity;
+import crud.models.ModelX;
 
-@DB("db2")
-@Entity("bookmark")
-public class Content extends MorphiaModelX { //extends MorphiaModel<Content> {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "content")
+public class Content extends ModelX {
+
+    @NotNull
     public String title;
 
+    public String summary;
+
+    public String content;
+
+    public String picture;
+
+    public String ip;
+
     public String url;
+
+    @Transient
+    public User author;
 }

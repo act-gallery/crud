@@ -1,12 +1,12 @@
 package crud.demos.controllers;
 
 import act.controller.annotation.UrlContext;
-import crud.controllers.Crud;
+import crud.controllers.CrudJpa;
 import crud.demos.models.User;
 import org.osgl.mvc.annotation.GetAction;
 
 @UrlContext("api/v1/users")
-public class UserController extends Crud<Long, User> {
+public class UserController extends CrudJpa<Long, User> {
 
     @GetAction("test")
     public User testCreate() throws Exception {

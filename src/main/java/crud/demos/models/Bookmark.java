@@ -1,41 +1,21 @@
 package crud.demos.models;
 
-import act.util.SimpleBean;
-import crud.models.ModelX;
+import act.db.DB;
+import crud.models.ModelMorphiaX;
+import org.mongodb.morphia.annotations.Entity;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-@Entity(name = "bookmark")
-public class Bookmark extends ModelX { // implements SimpleBean
+@DB("db2")
+@Entity("bookmark")
+public class Bookmark extends ModelMorphiaX {
 
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;*/
-
-    public String name;
-
+    @NotNull
     public String title;
 
     public String url;
 
-    @Transient
-    public User user;
-
-    /*public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }*/
+    public Integer viewTimes;
 
     public Bookmark() {
     }
