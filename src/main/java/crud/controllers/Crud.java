@@ -39,13 +39,18 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
         this.dao = $.requireNotNull(dao);
     }
 
+    @Before
+    public void init() {
+        context.login("crud");
+    }
+
     /**
      * 列表：根据条件查找
      *
      * @param idList
      * @return 查找到的对象列表
      */
-    @GetAction
+    @PostAction
     public ResponseData list(List<ID> idList, RequestData d) {
         setPropertySpec(d);
         Iterable<T> objList = idList.isEmpty() ? dao.findAll() : dao.findByIdList(idList);

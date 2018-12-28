@@ -1,14 +1,17 @@
 package crud.models;
 
 import act.db.CreatedAt;
+import act.db.CreatedBy;
 import act.db.LastModifiedAt;
+import act.db.LastModifiedBy;
 import act.inject.param.NoBind;
 import act.util.SimpleBean;
 import org.bson.types.ObjectId;
-import org.joda.time.DateTime;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Version;
+
+import java.util.Date;
 
 @NoBind
 public abstract class ModelMorphiaX implements SimpleBean {
@@ -38,13 +41,19 @@ public abstract class ModelMorphiaX implements SimpleBean {
      */
     @Indexed
     @CreatedAt
-    public DateTime ct;
+    public Date ct;
+
+    @CreatedBy
+    public String cu;
 
     /**
      * 最后修改时间
      */
     @Indexed
     @LastModifiedAt
-    public DateTime my;
+    public Date mt;
+
+    @LastModifiedBy
+    public String mu;
 
 }
