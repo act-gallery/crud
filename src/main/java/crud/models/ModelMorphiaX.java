@@ -12,8 +12,10 @@ import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Version;
 
 import java.util.Date;
+import javax.persistence.MappedSuperclass;
 
 @NoBind
+@MappedSuperclass
 public abstract class ModelMorphiaX implements SimpleBean {
 
     /**
