@@ -11,12 +11,13 @@ import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Version;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.MappedSuperclass;
 
 @NoBind
 @MappedSuperclass
-public abstract class ModelMorphiaX implements SimpleBean {
+public abstract class ModelMorphiaX implements SimpleBean, Serializable {
 
     /**
      * 主键

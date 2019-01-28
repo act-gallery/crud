@@ -8,6 +8,9 @@ import act.inject.param.NoBind;
 import act.util.Global;
 import act.util.PropertySpec;
 import crud.util.*;
+import net.oschina.j2cache.CacheChannel;
+import net.oschina.j2cache.CacheObject;
+import net.oschina.j2cache.J2Cache;
 import org.osgl.$;
 import org.osgl.inject.BeanSpec;
 import org.osgl.mvc.annotation.*;
@@ -24,6 +27,10 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
     @Global
     @NoBind
     protected D dao;
+
+    @Global
+    @NoBind
+    protected CacheChannel cache;
 
     /**
      * 依赖注入：上下文环境
@@ -42,6 +49,7 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
     @Before
     public void init() {
         context.login("crud");
+        cache = J2Cache.getChannel();
     }
 
     /**
@@ -67,7 +75,17 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
     @PostAction("show/{id}")
     @ResponseStatus(200)
     public T show(ID id, RequestData d) {
-        T obj = dao.findById(id);
+        T obj = null;
+        CacheObject co = cache.get("default", id.toString());
+        if(null != co && null != co.getValue()) {
+            obj = (T) co.getValue();
+        }
+        if(null == obj) {
+            obj = dao.findById(id);
+            if(null != obj) {
+                cache.set("default", id.toString(), obj);
+            }
+        }
         setPropertySpec(d);
         return obj;
     }
