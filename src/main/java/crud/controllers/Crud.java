@@ -2,15 +2,15 @@ package crud.controllers;
 
 import act.Act;
 import act.app.ActionContext;
+import act.app.App;
 import act.db.DaoBase;
 import act.db.DaoLoader;
 import act.inject.param.NoBind;
 import act.util.Global;
 import act.util.PropertySpec;
 import crud.util.*;
-import net.oschina.j2cache.CacheChannel;
-import net.oschina.j2cache.CacheObject;
-import net.oschina.j2cache.J2Cache;
+import net.oschina.j2cache.*;
+import org.nustaq.serialization.FSTConfiguration;
 import org.osgl.$;
 import org.osgl.inject.BeanSpec;
 import org.osgl.mvc.annotation.*;
@@ -47,9 +47,11 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
     }
 
     @Before
-    public void init() {
+    public void init(App app) {
         context.login("crud");
         cache = J2Cache.getChannel();
+        FSTConfiguration conf = FSTConfiguration.getDefaultConfiguration();
+        conf.setClassLoader(app.classLoader());
     }
 
     /**
