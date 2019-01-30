@@ -6,6 +6,7 @@ import act.app.App;
 import act.db.DaoBase;
 import act.db.DaoLoader;
 import act.inject.param.NoBind;
+import act.job.OnAppStart;
 import act.util.Global;
 import act.util.PropertySpec;
 import crud.util.*;
@@ -46,12 +47,17 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
         this.dao = $.requireNotNull(dao);
     }
 
+    @OnAppStart
+    public static void globalInit(App app) {
+        J2Cache.getChannel(); // need to call this before FST conf setting
+        FSTConfiguration conf = FSTConfiguration.getDefaultConfiguration();
+        conf.setClassLoader(app.classLoader());
+    }
+
     @Before
     public void init(App app) {
         context.login("crud");
         cache = J2Cache.getChannel();
-        FSTConfiguration conf = FSTConfiguration.getDefaultConfiguration();
-        conf.setClassLoader(app.classLoader());
     }
 
     /**
