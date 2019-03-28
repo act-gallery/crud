@@ -17,6 +17,7 @@ public class Content extends ModelX {
 
     public String summary;
 
+    //@NotNull
     public String content;
 
     public String picture;

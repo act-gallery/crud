@@ -8,4 +8,5 @@ import org.bson.types.ObjectId;
 @UrlContext("api/v1/bookmark")
 public class BookmarkService extends CrudMorphia<ObjectId, Bookmark> {
     // extends SimpleRestfulServiceBase<Integer, Bookmark, JPADao<Integer, Bookmark>> {
+
 }

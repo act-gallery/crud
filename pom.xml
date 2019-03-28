@@ -29,6 +29,12 @@
     </dependency>
 
     <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.47</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.actframework</groupId>
       <artifactId>act-morphia</artifactId>
       <version>1.6.6</version>

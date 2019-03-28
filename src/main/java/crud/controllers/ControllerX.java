@@ -5,6 +5,7 @@ import static act.Act.LOGGER;
 import act.controller.Controller;
 import act.inject.param.NoBind;
 import org.osgl.mvc.annotation.*;
+import org.osgl.mvc.result.InternalServerError;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -36,10 +37,11 @@ public class ControllerX extends Controller.Util {
 
     @Catch(value=Throwable.class, priority = 1)
     public void catchThrowable(Throwable throwable) {
+        System.out.println("catchThrowable:;:::::::::::::");
         success = false;
-        //System.out.println("catchThrowable:;:::::::::::::");
-        LOGGER.error("Action execute failed at [%s].", throwable.getStackTrace());
-        LOGGER.error("Error is: %s.", getExceptionStr(throwable));
+        //LOGGER.error("Action execute failed at [%s].", throwable.getStackTrace());
+        //LOGGER.error("Error is: %s.", getExceptionStr(throwable));
+        throw new InternalServerError();
     }
 
     protected static String getExceptionStr(Throwable throwable) {

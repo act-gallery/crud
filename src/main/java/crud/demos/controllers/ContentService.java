@@ -6,4 +6,6 @@ import crud.demos.models.Content;
 
 @UrlContext("api/v1/content")
 public class ContentService extends CrudJpa<Long, Content> {
+
+
 }

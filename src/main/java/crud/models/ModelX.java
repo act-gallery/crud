@@ -5,10 +5,11 @@ import act.db.LastModifiedAt;
 import act.util.SimpleBean;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
-public class ModelX implements SimpleBean {
+public class ModelX implements SimpleBean, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,6 +6,7 @@ import act.app.App;
 import act.db.DaoBase;
 import act.db.DaoLoader;
 import act.inject.param.NoBind;
+import act.job.OnAppStart;
 import act.util.Global;
 import act.util.PropertySpec;
 import crud.util.*;
@@ -47,11 +48,12 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
     }
 
     @Before
-    public void init(App app) {
+    //@OnAppStart
+    public void init() {
         context.login("crud");
         cache = J2Cache.getChannel();
         FSTConfiguration conf = FSTConfiguration.getDefaultConfiguration();
-        conf.setClassLoader(app.classLoader());
+        conf.setClassLoader(App.instance().classLoader());
     }
 
     /**
@@ -101,7 +103,8 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
     @PostAction("create")
     public T create(@Valid T obj, RequestData d) {
         setPropertySpec(d);
-        return dao.save(obj);
+        T t = dao.save(obj);
+        return t;
     }
 
     /**
