@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 @Entity
 @Table(name = "content")
@@ -25,6 +26,9 @@ public class Content extends ModelX {
     public String ip;
 
     public String url;
+
+    @Transient
+    public Map<String, Object> inner;
 
     @Transient
     public User author;

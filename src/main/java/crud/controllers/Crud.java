@@ -23,6 +23,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import static act.controller.Controller.Util.notFoundIfNull;
+
 public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
 
     @Global
@@ -86,11 +88,17 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
         }
         if(null == obj) {
             obj = dao.findById(id);
+            notFoundIfNull(obj);
             if(null != obj) {
                 cache.set("default", id.toString(), obj);
             }
         }
+        obj = showHook(obj);
         setPropertySpec(d);
+        return obj;
+    }
+
+    protected T showHook(T obj) {
         return obj;
     }
 
