@@ -125,7 +125,7 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
     @PutAction("{id}")
     public T update(ID id, @Valid T obj, RequestData d) {
         T oobj = dao.findById(id);
-        $.merge(obj).filter("-id").to(oobj);
+        $.merge(obj).filter("-id,-v").to(oobj);
         setPropertySpec(d);
         return dao.save(oobj);
     }

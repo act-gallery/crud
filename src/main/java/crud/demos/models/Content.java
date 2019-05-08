@@ -1,16 +1,19 @@
 package crud.demos.models;
 
-import act.db.DB;
 import crud.models.ModelX;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 @Entity
-@Table(name = "content")
+@Table(
+        name = "content",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"content", "title"})
+)
 public class Content extends ModelX {
 
     @NotNull
