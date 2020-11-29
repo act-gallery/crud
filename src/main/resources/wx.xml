@@ -1,0 +1,18 @@
+<xml>
+  <msg>
+    <ToUserName>Tom</ToUserName>
+    <FromUserName>Jessie</FromUserName>
+    <CreateTime>1348831860</CreateTime>
+    <MsgType>SMS</MsgType>
+    <Content>Hello</Content>
+    <MsgId>1234567890123456</MsgId>
+  </msg>
+  <msg>
+    <ToUserName>Peter</ToUserName>
+    <FromUserName>Davnia</FromUserName>
+    <CreateTime>1348831862</CreateTime>
+    <MsgType>SMS</MsgType>
+    <Content>Hi</Content>
+    <MsgId>1234567890123456</MsgId>
+  </msg>
+</xml>

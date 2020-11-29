@@ -67,7 +67,7 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
     @PostAction
     public ResponseData list(List<ID> idList, RequestData d) {
         setPropertySpec(d);
-        Iterable<T> objList = idList.isEmpty() ? dao.findAll() : dao.findByIdList(idList);
+        Iterable<T> objList = null == idList ? dao.findAll() : dao.findByIdList(idList);
         Sort s1 = new Sort("name", true);
         return new ResponseData(objList, new Page(1, 10, 20L, 2), new Sort[]{s1});
     }
@@ -93,12 +93,12 @@ public abstract class Crud<ID, T, D extends DaoBase<ID, T, ?>> {
                 cache.set("default", id.toString(), obj);
             }
         }
-        obj = showHook(obj);
+        obj = showHook(obj, d);
         setPropertySpec(d);
         return obj;
     }
 
-    protected T showHook(T obj) {
+    protected T showHook(T obj, RequestData d) {
         return obj;
     }
 
